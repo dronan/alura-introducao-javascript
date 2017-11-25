@@ -11,9 +11,12 @@ botaoAdicionar.addEventListener("click", function(event){
 
 	var pacienteTr = montaTr(paciente);
 
-	if (!validaPaciente(paciente)) {
-		console.log("Paciente inválido!");
-		return; // sai da funcao
+	var erros = validaPaciente(paciente);
+
+	
+	if (erros.length > 0) {
+		exibeMensagensDeErro(erros);
+		return;
 	}
 
 	var tabela = document.querySelector("#tabela-pacientes");
@@ -22,8 +25,21 @@ botaoAdicionar.addEventListener("click", function(event){
 
 	form.reset();
 
+	document.querySelector("#mensagem-erro").innerHTML = "";
+
 
 });
+
+function exibeMensagensDeErro (erros) {
+	var ul = document.querySelector("#mensagem-erro");
+	ul.innerHTML = "";
+	erros.forEach(function(erro){
+		var li = document.createElement("li");
+		li.textContent = erro;
+		ul.appendChild(li);
+	});
+}
+
 
 function obtemPacienteDoFormulario(form){
 
@@ -61,10 +77,27 @@ function montaTd(dado, classe) {
 }
 
 function validaPaciente(paciente){
-	if (validaPeso(paciente.peso) && validaAltura(paciente.altura)) {
-		return true;
-	} else {
-		return false;
+
+	var erros = [];
+
+console.log(paciente);
+
+	if (paciente.nome.length == 0) {
+		erros.push("O nome não pode ser em branco");
 	}
+
+	if (!validaPeso(paciente.peso)) { 
+		erros.push("O peso não é valido!");
+	}
+
+	if (!validaAltura(paciente.altura)){
+		erros.push("A altura não é valida!");
+	}
+
+	if(paciente.gordura.length == 0){
+		erros.push("A gordura não pode ser em branco");
+	}
+
+	return erros;
 
 }

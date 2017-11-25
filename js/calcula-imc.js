@@ -29,7 +29,7 @@ for (var i = 0; i < pacientes.length; i++) {
 	}
 
 	if (!alturaEhValida) {
-		tdImc.textContent += "Altura invalida!";
+		tdImc.textContent = "Altura invalida!";
 		alturaEhValida = false;
 		paciente.classList.add("paciente-invalido");
 	}
