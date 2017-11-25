@@ -80,8 +80,6 @@ function validaPaciente(paciente){
 
 	var erros = [];
 
-console.log(paciente);
-
 	if (paciente.nome.length == 0) {
 		erros.push("O nome não pode ser em branco");
 	}
