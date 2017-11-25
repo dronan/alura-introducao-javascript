@@ -4,14 +4,17 @@ var botaoAdicionar = document.querySelector("#adicionar-paciente");
 botaoAdicionar.addEventListener("click", function(event){
 	
 	event.preventDefault(); // Evita o comportamento padrao de um botao, que é o submit do form; tira a necessidade do type button
-	
-	console.log("evento click");
 
 	var form = document.querySelector("#form-adiciona");
 
 	var paciente =  obtemPacienteDoFormulario(form);
 
 	var pacienteTr = montaTr(paciente);
+
+	if (!validaPaciente(paciente)) {
+		console.log("Paciente inválido!");
+		return; // sai da funcao
+	}
 
 	var tabela = document.querySelector("#tabela-pacientes");
 
@@ -55,4 +58,13 @@ function montaTd(dado, classe) {
 	td.classList.add(classe);
 
 	return td;
+}
+
+function validaPaciente(paciente){
+	if (validaPeso(paciente.peso) && validaAltura(paciente.altura)) {
+		return true;
+	} else {
+		return false;
+	}
+
 }
