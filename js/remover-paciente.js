@@ -20,5 +20,10 @@ tabela.addEventListener("dblclick", function(event){
 
 	var alvoEvento = event.target; // pega a TD que recebeu o duplo click
 	var paiDoAlvo = alvoEvento.parentNode; // volta um nó anterior e encontra a Tr pai da td/
-	paiDoAlvo.remove(); // remove a linha
+	paiDoAlvo.classList.add("fadeOut");
+	
+	setTimeout(function(){
+		paiDoAlvo.remove(); // remove a linha
+	},500)
+	
 })
